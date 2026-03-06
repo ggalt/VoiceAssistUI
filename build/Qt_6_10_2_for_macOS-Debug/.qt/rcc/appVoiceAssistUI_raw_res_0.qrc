@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/VoiceAssistUI/">
+    <file alias="Icons.qrc">/Users/ggalt66/workspace/VoiceAssistUI/Icons.qrc</file>
+  </qresource>
+</RCC>
+

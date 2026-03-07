@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/VoiceAssistUI/">
-    <file alias="Components/qmldir">/Users/ggalt66/workspace/VoiceAssistUI/build/Qt_6_10_2_for_macOS-Debug/VoiceAssistUI/Components/qmldir</file>
-  </qresource>
-</RCC>
-

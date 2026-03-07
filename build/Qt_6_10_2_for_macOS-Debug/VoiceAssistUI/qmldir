@@ -1,9 +1,0 @@
-module VoiceAssistUI
-typeinfo appVoiceAssistUI.qmltypes
-prefer :/qt/qml/VoiceAssistUI/
-Main 254.0 Main.qml
-MyDailyForecastCard 254.0 Components/MyDailyForecastCard.qml
-DetailWeatherCard 254.0 Components/DetailWeatherCard.qml
-WeatherItemDetail 254.0 Components/WeatherItemDetail.qml
-depends QtQuick
-

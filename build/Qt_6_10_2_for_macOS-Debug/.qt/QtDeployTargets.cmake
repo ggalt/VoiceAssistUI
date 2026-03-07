@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_appVoiceAssistUI_FILE /Users/ggalt66/workspace/VoiceAssistUI/build/Qt_6_10_2_for_macOS-Debug/appVoiceAssistUI.app/Contents/MacOS/appVoiceAssistUI)
-set(__QT_DEPLOY_TARGET_appVoiceAssistUI_TYPE EXECUTABLE)

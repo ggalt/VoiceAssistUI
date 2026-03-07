@@ -10,7 +10,9 @@ const ICON_NAMES = new Set([
     "electric_bolt",
     "flood",
     "foggy",
+    "heat",
     "mist",
+    "moon_stars",
     "partly_cloudy_day",
     "partly_cloudy_night",
     "rainy",
@@ -25,20 +27,36 @@ const ICON_NAMES = new Set([
     "sunny_snowing",
     "tornado",
     "tsunami",
+    "water",
     "weather_hail",
     "weather_mix",
     "weather_snowy"
 ]);
 
-function findIcon(iconName) {
+function normalizeIconSize(iconSize) {
+    if (typeof iconSize !== "string") {
+        return "small";
+    }
+
+    const trimmedSize = iconSize.trim().toLowerCase();
+    if (trimmedSize === "small" || trimmedSize === "large") {
+        return trimmedSize;
+    }
+
+    return "small";
+}
+
+function findIcon(iconName, iconSize) {
+    const size = normalizeIconSize(iconSize);
+
     if (typeof iconName !== "string") {
-        return "qrc:/weather/images/weather_mix.svg";
+        return "qrc:/weather/images/" + size + "/weather_mix.svg";
     }
 
     const trimmedName = iconName.trim();
     if (ICON_NAMES.has(trimmedName)) {
-        return "qrc:/weather/images/" + trimmedName + ".svg";
+        return "qrc:/weather/images/" + size + "/" + trimmedName + ".svg";
     }
 
-    return "qrc:/weather/images/weather_mix.svg";
+    return "qrc:/weather/images/" + size + "/weather_mix.svg";
 }

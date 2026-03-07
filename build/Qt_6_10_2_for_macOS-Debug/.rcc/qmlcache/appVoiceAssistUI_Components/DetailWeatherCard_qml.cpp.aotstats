@@ -8,7 +8,7 @@
                         {
                             "codegenResult": 0,
                             "column": 38,
-                            "durationMicroseconds": 1000,
+                            "durationMicroseconds": 0,
                             "functionName": "temperatureUnit",
                             "line": 7,
                             "message": ""

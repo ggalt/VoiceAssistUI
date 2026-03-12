@@ -1,4 +1,5 @@
 import QtQuick
+import "../helper_functions.js" as Helpers
 
 Item {
     implicitWidth: 324
@@ -10,11 +11,12 @@ Item {
         id: dailyForecastCard
         anchors.fill: parent
         color: "#00ffffff"
-        property string dayName: "Mon"
+        property string dayName: ""
         property string weatherType: ""
         property string temperatureUnit: "\u00B0" + "F"
-        property string tempHi: "60"
+        property string tempHi: ""
         property string tempLo: ""
+
         Text {
             id: txtDay
             text: qsTr(parent.dayName)

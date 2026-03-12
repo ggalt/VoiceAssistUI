@@ -20,6 +20,7 @@ qt_add_qml_module(appVoiceAssistUI
         Components/DetailWeatherCard.qml
         Components/WeatherItemDetail.qml
         helper_functions.js
+        QML_FILES Components/Constants.qml
 )
 
 qt6_add_resources(APP_RESOURCES Icons.qrc)

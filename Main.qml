@@ -12,6 +12,7 @@ Window {
     width: Constants.screenWidth
     height: Constants.screenHeight
     visible: true
+    visibility: Window.FullScreen
 
     ListModel { id: dailyForecastModel }
 

@@ -2,6 +2,7 @@
 #include <QLoggingCategory>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QCursor>
 #include <QScreen>
 #include <QtWebEngineQuick>
 
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
     QtWebEngineQuick::initialize();
 
     QGuiApplication app(argc, argv);
+    app.setOverrideCursor(QCursor(Qt::BlankCursor));
 
     QQmlApplicationEngine engine;
 

@@ -3,6 +3,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QScreen>
+#include <QtWebEngineQuick>
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +11,8 @@ int main(int argc, char *argv[])
     QLoggingCategory::setFilterRules(
         "*.debug=false\n"
         "qml.debug=true");
+
+    QtWebEngineQuick::initialize();
 
     QGuiApplication app(argc, argv);
 

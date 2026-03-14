@@ -9,16 +9,33 @@ import "helper_functions.js" as Helpers
 
 Window {
     id: mainWindow
-    width: 800
-    height: 480
-    // width: constants.screenWidth
-    // height: constants.screenHeight
+    width: Constants.screenWidth
+    height: Constants.screenHeight
     visible: true
+
+    ListModel { id: dailyForecastModel }
+
+    function populateDailyForecast() {
+        dailyForecastModel.clear();
+        var forecast = Helpers.getDailyForecast();
+        for (var i = 0; i < forecast.length; i++) {
+            var entry = forecast[i];
+            dailyForecastModel.append({
+                dayName: Helpers.getDayName(entry.datetime),
+                weatherType: Helpers.findIcon(Helpers.weatherStateToIcon(entry.condition), "60"),
+                tempHi: String(entry.temperature),
+                tempLo: String(entry.templow),
+                precipPercent: String(entry.precipitation_probability),
+                precipAmount: String(entry.precipitation),
+                precipUnit: Helpers.getWeatherValue("precipitation_unit") || "in"
+            });
+        }
+    }
 
     Timer {
         id: tickTock
         property bool showColon: true
-        property int weatherCount: 0
+        property int weatherCount: -1
         interval: 1000
         running: true
         repeat: true
@@ -27,9 +44,10 @@ Window {
             digitalClockPeriod.text = Helpers.getTime("p", showColon)
             showColon = !showColon;
             weatherCount +=1;
-            if( weatherCount > 300 ) {
+            if( weatherCount === 0 || weatherCount > 300 ) {
                 weatherToday.getNewWeather();
-                weatherCount = 0;
+                populateDailyForecast();
+                weatherCount = 1;
             }
         }
     }
@@ -63,7 +81,6 @@ Window {
                             + "if (el) { el.dispatchEvent(new MouseEvent('click', "
                             + "{bubbles: true, cancelable: true, clientX: %1, clientY: %2})); }"
                         js = js.arg(mouse.x).arg(mouse.y);
-                        console.log("jsClick:", js);
                         immichWebView.runJavaScript(js);
                     }
                 }
@@ -73,6 +90,7 @@ Window {
 
         Item {
             id: weatherView
+            Component.onCompleted: populateDailyForecast()
             DetailWeatherCard {
                 id: weatherToday
                 anchors.left: parent.left
@@ -121,10 +139,17 @@ Window {
                         spacing: 0
 
                         Repeater {
-                            model: 8
-                            MyDailyForecastCard {
+                            model: dailyForecastModel
+                            delegate: MyDailyForecastCard {
                                 width: weatherDailyFlickable.width / 5
                                 height: weatherDailyFlickable.height
+                                dayName: model.dayName
+                                weatherType: model.weatherType
+                                tempHi: model.tempHi
+                                tempLo: model.tempLo
+                                precipPercent: model.precipPercent
+                                precipAmount: model.precipAmount
+                                precipUnit: model.precipUnit
                             }
                         }
                     }

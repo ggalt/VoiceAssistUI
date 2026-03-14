@@ -1,10 +1,11 @@
+pragma Singleton
 import QtQuick
-import QtQuick.Window 2.2
 
-Item {
-    id: constants
-    property int screenWidth: ScreenInfo.width
-    property int screenHeight: ScreenInfo.height
+QtObject {
+    // readonly property int screenWidth: primaryScreenWidth
+    // readonly property int screenHeight: primaryScreenHeight
+    readonly property int screenWidth: 800
+    readonly property int screenHeight: 480
 
     readonly property font smallFont: ({
         family: "Arial",

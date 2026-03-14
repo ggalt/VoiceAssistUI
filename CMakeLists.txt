@@ -12,6 +12,10 @@ qt_add_executable(appVoiceAssistUI
     main.cpp
 )
 
+set_source_files_properties(Components/Constants.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(appVoiceAssistUI
     URI VoiceAssistUI
     QML_FILES
@@ -20,7 +24,7 @@ qt_add_qml_module(appVoiceAssistUI
         Components/DetailWeatherCard.qml
         Components/WeatherItemDetail.qml
         helper_functions.js
-        QML_FILES Components/Constants.qml
+        Components/Constants.qml
 )
 
 qt6_add_resources(APP_RESOURCES Icons.qrc)

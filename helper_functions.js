@@ -1,3 +1,5 @@
+.pragma library
+
 // Returns a QRC URL for weather icons declared in Icons.qrc.
 const ICON_NAMES = new Set([
     "blizzard",
@@ -162,8 +164,6 @@ function loadWeatherData(filePath) {
     if ((xhr.status === 200 || xhr.status === 0) && xhr.responseText) {
         var data = JSON.parse(xhr.responseText);
         setWeatherData(data);
-        console.log("loadWeatherData: success, state=" + data.state +
-                     ", attributes keys=" + Object.keys(data.attributes));
         return true;
     }
 
@@ -186,8 +186,6 @@ function setWeatherData(data) {
 //   "attribution", "friendly_name", "supported_features"
 function getWeatherValue(key) {
     if (!_weatherData || typeof key !== "string") {
-        console.log("getWeatherValue: _weatherData is " +
-                     (_weatherData ? "loaded" : "null") + ", key=" + key);
         return undefined;
     }
 
@@ -273,8 +271,6 @@ function getTime(element, showColon) {
     var seconds = now.getSeconds();
     var period = hours < 12 ? "AM" : "PM";
 
-    console.log("call is:", element, showColon)
-
     hours = hours % 12;
     if (hours === 0) {
         hours = 12;
@@ -296,7 +292,6 @@ function getTime(element, showColon) {
     } else if(element === "s") {
         return ss;
     } else if(element === "p") {
-        console.log("period = ", period)
         return period;
     } else {
         return "";
@@ -309,6 +304,15 @@ var COMPASS_DIRECTIONS = [
     "S", "SSW", "SW", "WSW",
     "W", "WNW", "NW", "NNW"
 ];
+
+// Returns the short day name (e.g. "Mon") from an ISO datetime string.
+function getDayName(isoDatetime) {
+    if (typeof isoDatetime !== "string") return "";
+    var d = new Date(isoDatetime);
+    if (isNaN(d.getTime())) return "";
+    var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return days[d.getDay()];
+}
 
 function degreesToCompass(degrees) {
     if (typeof degrees !== "number" || degrees < 0 || degrees > 360) {

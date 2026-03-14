@@ -38,8 +38,6 @@ Rectangle {
         visibilityUnits = Helpers.getWeatherValue("visibility_unit");
         air_pressure = Helpers.getWeatherValue("pressure");
         air_pressure_unit = Helpers.getWeatherValue("pressure_unit");
-        console.log("DetailWeatherCard loaded: state=" + Helpers.getWeatherValue("state") +
-                     " temp=" + tempCurrent + " humidity=" + humidity);
     }
 
     WeatherItemDetail {

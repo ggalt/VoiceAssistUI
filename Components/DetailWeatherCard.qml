@@ -25,7 +25,7 @@ Rectangle {
     }
 
     function getNewWeather() {
-        Helpers.loadWeatherData("/home/esp32Dev/projects/VoiceAssistUI/data/openweathermap.json");
+        Helpers.loadWeatherData(applicationDirPath + "/data/openweathermap.json");
         weatherType = Helpers.weatherStateToIcon(Helpers.getWeatherValue("state"));
         tempCurrent = Helpers.getWeatherValue("temperature");
         humidity = Helpers.getWeatherValue("humidity");

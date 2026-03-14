@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     QScreen *primaryScreen = app.primaryScreen();
     engine.rootContext()->setContextProperty("primaryScreenWidth", primaryScreen->geometry().width());
     engine.rootContext()->setContextProperty("primaryScreenHeight", primaryScreen->geometry().height());
+    engine.rootContext()->setContextProperty("applicationDirPath", app.applicationDirPath());
 
     QObject::connect(
         &engine,

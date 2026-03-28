@@ -12,7 +12,7 @@ Window {
     width: Constants.screenWidth
     height: Constants.screenHeight
     visible: true
-    visibility: Window.FullScreen
+    // visibility: Window.FullScreen
 
     ListModel { id: dailyForecastModel }
 
@@ -23,7 +23,7 @@ Window {
             var entry = forecast[i];
             dailyForecastModel.append({
                 dayName: Helpers.getDayName(entry.datetime),
-                weatherType: Helpers.findIcon(Helpers.weatherStateToIcon(entry.condition), "60"),
+                weatherType: Helpers.findWeatherIcon(Helpers.weatherStateToIcon(entry.condition), "60"),
                 tempHi: String(entry.temperature),
                 tempLo: String(entry.templow),
                 precipPercent: String(entry.precipitation_probability),
@@ -231,6 +231,13 @@ Window {
                     }
                 }
             ]
+        }
+
+        Item {
+            id: musicWindow
+            MusicInterface {
+                anchors.fill: parent
+            }
         }
     }
 

@@ -12,7 +12,7 @@ Rectangle {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         // source: "/weather/images/clear_day.svg"
-        source: Helpers.findIcon(icon,iconSize)
+        source: Helpers.findWeatherIcon(icon,iconSize)
         height: parent.height
         width: parent.height
     }

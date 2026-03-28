@@ -1,0 +1,26 @@
+[Unit]
+Description=VoiceAssistUI Kiosk
+After=systemd-logind.service systemd-user-sessions.service dbus.service
+Wants=dbus.service
+
+[Service]
+Type=simple
+User=alarm
+PAMName=login
+TTYPath=/dev/tty1
+StandardInput=tty-fail
+StandardOutput=journal
+StandardError=journal
+
+# cage needs XDG_RUNTIME_DIR to be set
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+
+ExecStartPre=/bin/mkdir -p /run/user/1000
+ExecStartPre=/bin/chown alarm:alarm /run/user/1000
+ExecStartPre=/bin/chmod 0700 /run/user/1000
+ExecStart=/usr/bin/cage -- /home/alarm/projects/VoiceAssistUI/appVoiceAssistUI
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

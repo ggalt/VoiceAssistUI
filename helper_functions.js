@@ -1,7 +1,7 @@
 .pragma library
 
 // Returns a QRC URL for weather icons declared in Icons.qrc.
-const ICON_NAMES = new Set([
+const WEATHER_ICON_NAMES = new Set([
     "blizzard",
     "blowing_snow",
     "clear_alt",
@@ -68,7 +68,7 @@ function normalizeIconSize(iconSize) {
     return "60";
 }
 
-function findIcon(iconName, iconSize) {
+function findWeatherIcon(iconName, iconSize) {
     const size = normalizeIconSize(iconSize);
 
     if (typeof iconName !== "string") {
@@ -76,14 +76,44 @@ function findIcon(iconName, iconSize) {
     }
 
     const trimmedName = iconName.trim();
-    if (ICON_NAMES.has(trimmedName)) {
+    if (WEATHER_ICON_NAMES.has(trimmedName)) {
         return "qrc:/weather/images/" + size + "/" + trimmedName + ".png";
     }
 
     return "qrc:/weather/images/" + size + "/wintry_mix.png";
 }
 
+const AUDIO_ICON_NAMES = new Set([
+    "pause",
+    "pause_circle",
+    "play_arrow",
+    "play_circle",
+    "play_pause",
+    "repeat",
+    "repeat_on",
+    "repeat_one",
+    "shuffle",
+    "shuffle_on",
+    "skip_next",
+    "skip_previous",
+    "stop",
+    "stop_circle"
+]);
 
+function findAudioIcon(iconName, iconSize) {
+    const size = normalizeIconSize(iconSize);
+
+    if (typeof iconName !== "string") {
+        return "";
+    }
+
+    const trimmedName = iconName.trim();
+    if (AUDIO_ICON_NAMES.has(trimmedName)) {
+        return "qrc:/audio/images/" + size + "/" + trimmedName + ".png";
+    }
+
+    return "";
+}
 
 const WEATHER_STATE_TO_ICON = {
     "blizzard": "blizzard",

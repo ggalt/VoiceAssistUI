@@ -25,6 +25,9 @@ qt_add_qml_module(appVoiceAssistUI
         Components/WeatherItemDetail.qml
         helper_functions.js
         Components/Constants.qml
+        Components/MusicInterface.qml
+        audioFunctions.js
+        QML_FILES Components/ScrollingText.qml
 )
 
 qt6_add_resources(APP_RESOURCES Icons.qrc)

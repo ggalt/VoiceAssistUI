@@ -2,8 +2,7 @@
 
 // --- Configuration ---
 var serverUrl = "http://192.168.1.10:9000/jsonrpc.js"
-// var playerId = _readMacAddress()
-var playerId = "e4:5f:01:fa:ff:aa"
+var playerId = _readMacAddress()
 
 function _readMacAddress() {
     var xhr = new XMLHttpRequest();

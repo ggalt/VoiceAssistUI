@@ -351,3 +351,46 @@ function degreesToCompass(degrees) {
     var index = Math.round(degrees / 22.5) % 16;
     return COMPASS_DIRECTIONS[index];
 }
+
+// Format the current time according to a format string.
+// Supported tokens (longer tokens consumed first):
+//   HH / H   = 24-hour clock, zero-padded / unpadded  (00-23 / 0-23)
+//   hh / h   = 12-hour clock, zero-padded / unpadded  (01-12 / 1-12)
+//   mm / m   = minutes,       zero-padded / unpadded  (00-59 / 0-59)
+//   MM / M   = same as mm / m (convenience, since users often write MM for minutes)
+// Any literal ":" in the format is replaced with " " when showColon is false,
+// so callers can produce a blinking colon by toggling showColon at 1 Hz.
+//
+// Returns an object: { time: "<formatted time>", period: "AM" | "PM" }.
+// The AM/PM period is returned separately so callers can style it with its
+// own font size / color if desired.
+function formatClockTime(format, showColon) {
+    var now = new Date();
+    var h24 = now.getHours();
+    var minutes = now.getMinutes();
+    var period = h24 < 12 ? "AM" : "PM";
+    var h12 = h24 % 12;
+    if (h12 === 0) {
+        h12 = 12;
+    }
+
+    function pad2(n) { return (n < 10 ? "0" : "") + n; }
+
+    var fmt = (typeof format === "string" && format.length > 0) ? format : "hh:mm";
+
+    var out = fmt
+        .replace(/HH/g, pad2(h24))
+        .replace(/hh/g, pad2(h12))
+        .replace(/MM/g, pad2(minutes))
+        .replace(/mm/g, pad2(minutes))
+        .replace(/H/g, String(h24))
+        .replace(/h/g, String(h12))
+        .replace(/M/g, String(minutes))
+        .replace(/m/g, String(minutes));
+
+    if (!showColon) {
+        out = out.replace(/:/g, " ");
+    }
+
+    return { time: out, period: period };
+}

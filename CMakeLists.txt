@@ -27,6 +27,7 @@ qt_add_qml_module(appVoiceAssistUI
         Components/Constants.qml
         Components/MusicInterface.qml
         audioFunctions.js
+        Components/DigitalClock.qml
         QML_FILES Components/ScrollingText.qml
 )
 

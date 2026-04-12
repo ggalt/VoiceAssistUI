@@ -14,6 +14,15 @@ Rectangle {
     property int currentRepeat: 0
     property bool volumeAdjusting: false
 
+    function updateTemperature() {
+        Helpers.loadWeatherData(applicationDirPath + "/data/openweathermap.json")
+        var temp = Helpers.getWeatherValue("temperature")
+        var unit = Helpers.getWeatherValue("temperature_unit")
+        if (temp !== undefined) {
+            txtTemp.text = Math.round(temp) + (unit ? unit : "\u00B0" + "F")
+        }
+    }
+
     function updateButtonIcons() {
         if (currentMode === "play") {
             btnPlay.icon.source = Helpers.findAudioIcon("pause", iconSize)
@@ -76,6 +85,7 @@ Rectangle {
 
                 updateButtonIcons()
             })
+            updateTemperature()
         }
     }
 
@@ -337,9 +347,8 @@ Rectangle {
         anchors.topMargin: 10
         anchors.bottomMargin: 10
 
-        Text {
+        DigitalClock {
             id: txtTime
-            text: qsTr("00:00AM")
             anchors.left: parent.left
             anchors.right: parent.horizontalCenter
             anchors.top: parent.top
@@ -348,14 +357,17 @@ Rectangle {
             anchors.rightMargin: 5
             anchors.topMargin: 5
             anchors.bottomMargin: 5
-            font.pixelSize: height * 0.6
+            timeFormat: "hh:mm"
+            showPeriod: true
+            timeColor: 'black'
+            timePixelSize: height * 0.6
+            periodPixelSize: height * 0.3
             horizontalAlignment: Text.AlignHCenter
-            verticalAlignment: Text.AlignVCenter
         }
 
         Text {
             id: txtTemp
-            text: qsTr("78F")
+            text: ""
             anchors.left: parent.horizontalCenter
             anchors.right: parent.right
             anchors.top: parent.top
